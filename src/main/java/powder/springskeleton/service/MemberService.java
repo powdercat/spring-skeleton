@@ -1,5 +1,7 @@
 package powder.springskeleton.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import powder.springskeleton.domain.Member;
 import powder.springskeleton.repository.MemberRepository;
 import powder.springskeleton.repository.MemoryMemberRepository;
@@ -7,11 +9,14 @@ import powder.springskeleton.repository.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
 
+// @Service annotation을 붙이면 스프링이 뜰 때 스프링 컨테이너에 MemberService 를 등록해준다
+@Service
 public class MemberService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         // MemberService 는 직접 new 하지 않고, 외부에서 memberRepository 를 넣어준다.
         // = DI (Dependency Injection)

@@ -1,9 +1,12 @@
 package powder.springskeleton.repository;
 
+import org.springframework.stereotype.Repository;
 import powder.springskeleton.domain.Member;
 
 import java.util.*;
 
+// @Repository annotation을 붙이면 스프링이 뜰 때 스프링 컨테이너에 MemoryMemberRepository 를 등록한다
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
