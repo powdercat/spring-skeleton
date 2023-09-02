@@ -2,6 +2,7 @@ package powder.springskeleton.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import powder.springskeleton.service.MemberService;
 
 @Controller
@@ -25,4 +26,9 @@ public class MemberController {
     // = Dependency Injection = 의존관계 주입
     // MemberService 에 @Service annotation 이 스프링 컨테이너에서 찾을 수 없기 때문에 에러가 난다. (이 상황에서 MemberService 는 순수한 자바코드이기 때문)
 
+
+    @GetMapping("/members/new")
+    public String createForm() {
+        return "members/createMemberForm";
+    }
 }
