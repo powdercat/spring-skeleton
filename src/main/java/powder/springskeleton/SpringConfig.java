@@ -2,13 +2,22 @@ package powder.springskeleton;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import powder.springskeleton.repository.JdbcMemberRepository;
 import powder.springskeleton.repository.MemberRepository;
 import powder.springskeleton.repository.MemoryMemberRepository;
 import powder.springskeleton.service.MemberService;
 
+import javax.sql.DataSource;
+
 // spring 이 뜰 때, @Configuration 을 읽고 @Bean 의 로직을 호출해서 스프링 빈에 등록한다.
 @Configuration
 public class SpringConfig {
+
+    private final DataSource dataSource;
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 
     // 컨트롤러에서는 어쩔 수 없이 @Controller, @Autowired 써야한다.
     // 스프링이 뜰 떼 MemberService, MemberRepository 를 스프링 빈에 등록하고, = @Service, @Repository
@@ -20,6 +29,8 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+        // 인터페이스를 두고 구현체를 갈아끼기만 하면 된다.
+//        return new MemoryMemberRepository();
+        return new JdbcMemberRepository(dataSource);
     }
 }
