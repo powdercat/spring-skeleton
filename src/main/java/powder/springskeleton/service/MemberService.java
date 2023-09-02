@@ -2,6 +2,7 @@ package powder.springskeleton.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import powder.springskeleton.domain.Member;
 import powder.springskeleton.repository.MemberRepository;
 import powder.springskeleton.repository.MemoryMemberRepository;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 // @Service annotation을 붙이면 스프링이 뜰 때 스프링 컨테이너에 MemberService 를 등록해준다
+@Transactional // jpa 를 쓰려면 transaction 이 항상 있어야 한다.
 public class MemberService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
