@@ -3,6 +3,7 @@ package powder.springskeleton;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import powder.springskeleton.repository.JdbcMemberRepository;
+import powder.springskeleton.repository.JdbcTemplateMemberRepository;
 import powder.springskeleton.repository.MemberRepository;
 import powder.springskeleton.repository.MemoryMemberRepository;
 import powder.springskeleton.service.MemberService;
@@ -31,6 +32,7 @@ public class SpringConfig {
     public MemberRepository memberRepository() {
         // 인터페이스를 두고 구현체를 갈아끼기만 하면 된다.
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
