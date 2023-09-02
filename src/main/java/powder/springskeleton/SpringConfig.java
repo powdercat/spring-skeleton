@@ -13,33 +13,27 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    // spring container 가 만들어놓은 MemberRepository 를 찾는데 없음 -> 그러면 SpringDataJpa 가 만든 구현체가 등록된다.
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
-
-    //    private final DataSource dataSource;
-//    public SpringConfig(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
-
 
     // 컨트롤러에서는 어쩔 수 없이 @Controller, @Autowired 써야한다.
     // 스프링이 뜰 떼 MemberService, MemberRepository 를 스프링 빈에 등록하고, = @Service, @Repository
     // 스프링 빈에 등록되어있는 MemberRepository 를 MemberService 에 넣어준다. = Autowired
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
+//    @Bean
+//    public MemberRepository memberRepository() {
         // 인터페이스를 두고 구현체를 갈아끼기만 하면 된다.
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
 //        return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
-    }
+//        return new JpaMemberRepository(em);
+//    }
 }
