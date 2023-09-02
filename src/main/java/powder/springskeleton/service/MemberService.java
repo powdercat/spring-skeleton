@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 // @Service annotation을 붙이면 스프링이 뜰 때 스프링 컨테이너에 MemberService 를 등록해준다
-@Service
 public class MemberService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
